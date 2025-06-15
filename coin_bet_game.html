@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bet Your Luck</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #2d89ff;
+    }
+    .balance {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .coin {
+      width: 150px;
+      height: 150px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/2/2e/US_One_Cent_Obv.png') no-repeat center;
+      background-size: cover;
+      border-radius: 50%;
+      margin: 20px auto;
+      transition: transform 2s ease-in-out;
+    }
+    input[type="number"] {
+      padding: 10px;
+      width: 150px;
+      margin: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>বেট করুন এবং আপনার ভাগ্য পরিবর্তন করুন</h1>
+  <div class="balance">আপনার ব্যালেন্স: <span id="balance">100</span> টাকা</div>
+
+  <div class="coin" id="coin"></div>
+
+  <div>
+    <input type="number" id="betAmount" placeholder="বেট এমাউন্ট লিখুন" min="1" />
+    <button onclick="placeBet()">বেট করুন</button>
+  </div>
+
+  <script>
+    let balance = 100;
+
+    function placeBet() {
+      const coin = document.getElementById("coin");
+      const betAmount = parseInt(document.getElementById("betAmount").value);
+
+      if (!betAmount || betAmount <= 0 || betAmount > balance) {
+        alert("সঠিক এমাউন্ট লিখুন বা পর্যাপ্ত ব্যালেন্স নেই।");
+        return;
+      }
+
+      // Spin animation
+      coin.style.transform = "rotateY(1440deg)";
+
+      // Disable button temporarily
+      document.querySelector("button").disabled = true;
+
+      setTimeout(() => {
+        const result = Math.random() < 0.5 ? "win" : "lose";
+        if (result === "win") {
+          balance += betAmount;
+          alert("অভিনন্দন! আপনি জিতেছেন " + betAmount + " টাকা!");
+        } else {
+          balance -= betAmount;
+          alert("দুঃখিত! আপনি হেরেছেন " + betAmount + " টাকা।");
+        }
+        document.getElementById("balance").innerText = balance;
+        document.querySelector("button").disabled = false;
+        coin.style.transform = "rotateY(0deg)";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

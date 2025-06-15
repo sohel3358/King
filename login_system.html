@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2d89ff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .link {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .link a {
+      color: #2d89ff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .form {
+      display: none;
+    }
+    .form.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <div id="loginForm" class="form active">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" id="loginUser" />
+      <input type="password" placeholder="Password" id="loginPass" />
+      <button onclick="login()">Login</button>
+      <div class="link">
+        <a href="#" onclick="showForm('registerForm')">Register</a> |
+        <a href="#" onclick="showForm('forgotForm')">Forgot Password?</a>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registerForm" class="form">
+      <h2>Register</h2>
+      <input type="text" placeholder="Username" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Register</button>
+      <div class="link">
+        <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+      </div>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <div id="forgotForm" class="form">
+      <h2>Forgot Password</h2>
+      <input type="email" placeholder="Enter your Email" />
+      <button>Send Reset Link</button>
+      <div class="link">
+        <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(id) {
+      document.querySelectorAll('.form').forEach(form => form.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function login() {
+      const username = document.getElementById('loginUser').value;
+      const password = document.getElementById('loginPass').value;
+
+      // Simple dummy check (replace with real authentication in production)
+      if(username === "admin" && password === "1234") {
+        alert("Login successful!");
+        // Redirect or open dashboard here
+      } else {
+        alert("Invalid credentials");
+      }
+    }
+  </script>
+</body>
+</html>

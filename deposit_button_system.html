@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ডিপোজিট সিস্টেম</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+      margin-top: 50px;
+    }
+    h2 {
+      color: #28a745;
+    }
+    .number-box {
+      background: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .success-message {
+      color: green;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #depositForm {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>ডিপোজিট করুন</h2>
+    <button onclick="showDepositForm()">ডিপোজিট করুন</button>
+
+    <div id="depositForm">
+      <h3>সেন্ড মানি করুন (নগদ / বিকাশ)</h3>
+      <div onclick="copyNumber()" class="number-box" id="number">01758233495</div>
+      <small>(এই নাম্বারে সেন্ড মানি করুন)</small><br/><br/>
+
+      <input type="text" id="trxid" placeholder="Transaction ID লিখুন" />
+      <input type="number" id="amount" placeholder="Amount (টাকা)" />
+
+      <br/>
+      <button onclick="submitDeposit()">সেন্ড</button>
+
+      <div class="success-message" id="successMsg"></div>
+    </div>
+  </div>
+
+  <script>
+    function showDepositForm() {
+      document.getElementById("depositForm").style.display = "block";
+    }
+
+    function copyNumber() {
+      const number = document.getElementById("number").innerText;
+      navigator.clipboard.writeText(number);
+      alert("নাম্বার কপি হয়েছে: " + number);
+    }
+
+    function submitDeposit() {
+      const trx = document.getElementById("trxid").value;
+      const amount = document.getElementById("amount").value;
+
+      if (!trx || !amount) {
+        alert("দয়া করে ট্রানজেকশন আইডি এবং এমাউন্ট লিখুন।");
+        return;
+      }
+
+      document.getElementById("successMsg").innerText = "✅ সফলভাবে ডিপোজিট হয়েছে!";
+    }
+  </script>
+
+</body>
+</html>
